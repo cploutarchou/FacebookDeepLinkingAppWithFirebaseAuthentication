@@ -24,27 +24,27 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUpUser() {
-        if (login_username.text.toString().isEmpty()) {
-            login_username.error = "Please enter email"
-            login_username.requestFocus()
+        if (sing_up_username.text.toString().isEmpty()) {
+            sing_up_username.error = "Please enter email"
+            sing_up_username.requestFocus()
             return
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(login_username.text.toString()).matches()) {
-            login_username.error = "Please enter valid email"
-            login_username.requestFocus()
+        if (!Patterns.EMAIL_ADDRESS.matcher(sing_up_username.text.toString()).matches()) {
+            sing_up_username.error = "Please enter valid email"
+            sing_up_username.requestFocus()
             return
         }
 
-        if (login_password.text.toString().isEmpty()) {
-            login_password.error = "Please enter password"
-            login_password.requestFocus()
+        if (sign_up_password.text.toString().isEmpty()) {
+            sign_up_password.error = "Please enter password"
+            sign_up_password.requestFocus()
             return
         }
 
         auth.createUserWithEmailAndPassword(
-            login_username.text.toString(),
-            login_password.text.toString()
+            sing_up_username.text.toString(),
+            sign_up_password.text.toString()
         )
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
