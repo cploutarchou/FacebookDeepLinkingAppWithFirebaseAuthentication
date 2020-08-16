@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FirebaseDemo</string>
+    <string name="app_name">FacebookLinkingTest</string>
     <string name="dont_have_account">Don\'t have account</string>
     <string name="login">Login</string>
     <string name="sign_up">SignUp</string>
