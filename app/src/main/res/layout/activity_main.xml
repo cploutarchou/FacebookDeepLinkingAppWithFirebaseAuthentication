@@ -16,7 +16,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo" />
+            tools:srcCompat="@android:drawable/sym_def_app_icon" />
 
         <EditText
             android:id="@+id/tv_username"
