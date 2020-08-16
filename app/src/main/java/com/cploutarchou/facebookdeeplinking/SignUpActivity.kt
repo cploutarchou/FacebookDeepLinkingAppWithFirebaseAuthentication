@@ -2,7 +2,6 @@ package com.cploutarchou.facebookdeeplinking
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,27 +24,27 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUpUser() {
-        if (tv_username.text.toString().isEmpty()) {
-            tv_username.error = "Please enter email"
-            tv_username.requestFocus()
+        if (login_username.text.toString().isEmpty()) {
+            login_username.error = "Please enter email"
+            login_username.requestFocus()
             return
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(tv_username.text.toString()).matches()) {
-            tv_username.error = "Please enter valid email"
-            tv_username.requestFocus()
+        if (!Patterns.EMAIL_ADDRESS.matcher(login_username.text.toString()).matches()) {
+            login_username.error = "Please enter valid email"
+            login_username.requestFocus()
             return
         }
 
-        if (tv_password.text.toString().isEmpty()) {
-            tv_password.error = "Please enter password"
-            tv_password.requestFocus()
+        if (login_password.text.toString().isEmpty()) {
+            login_password.error = "Please enter password"
+            login_password.requestFocus()
             return
         }
 
         auth.createUserWithEmailAndPassword(
-            tv_username.text.toString(),
-            tv_password.text.toString()
+            login_username.text.toString(),
+            login_password.text.toString()
         )
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
