@@ -19,13 +19,11 @@ class Dashboard : AppCompatActivity() {
     private fun setUserData() {
         val user = auth.currentUser
         user?.let {
-            // Name, email address, and profile photo Url
-            val name = user.displayName
             val email = user.email
 
             setContentView(R.layout.activity_dashboard)
 
-            val textView: TextView = findViewById(R.id.logged_user_name)
+            val textView: TextView = findViewById(R.id.tv_logged_user_name)
             textView.text = email.toString()
 
             val welcome: String = getString(R.string.tv_welcome)

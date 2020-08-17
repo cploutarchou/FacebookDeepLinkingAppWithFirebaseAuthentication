@@ -6,4 +6,5 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="tv_welcome">Welcome</string>
+    <string name="tv_logged_user_name">Logged User email</string>
 </resources>
