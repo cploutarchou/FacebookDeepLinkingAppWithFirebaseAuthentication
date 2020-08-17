@@ -42,6 +42,7 @@ class Dashboard : AppCompatActivity() {
             if (et_new_password.text.toString() == et_new_password_confirm.text.toString()) {
                 val user = auth.currentUser
                 if (user != null && user.email != null) {
+
                     val credential = EmailAuthProvider.getCredential(
                         user.email.toString(),
                         et_original_password.text.toString()
@@ -62,6 +63,7 @@ class Dashboard : AppCompatActivity() {
                                             "Your Password successfully updated.",
                                             Toast.LENGTH_SHORT
                                         ).show()
+
                                         auth.signOut()
                                         finish()
                                     }
@@ -77,20 +79,12 @@ class Dashboard : AppCompatActivity() {
 
                 }
             } else {
-                Toast.makeText(
-                    this,
-                    "Password combinations not matching",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, "Password combinations not matching", Toast.LENGTH_SHORT)
+                    .show()
             }
 
         } else {
-            Toast.makeText(
-                this,
-                "Please fill all required fields",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+            Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
         }
     }
 }
