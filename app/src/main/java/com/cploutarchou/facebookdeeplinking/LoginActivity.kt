@@ -59,9 +59,17 @@ class LoginActivity : AppCompatActivity() {
             login_password.text.toString()
         ).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
+//                Send Verification email to user.
+                val user = auth.currentUser
+                user!!.sendEmailVerification()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d(tag, "Email sent.")
+                        }
+                    }
+
                 // Sign in success, update UI with the signed-in user's information
                 Log.d(tag, "singInWithEmail:success")
-                val user = auth.currentUser
                 updateUI(user)
             } else {
                 // If sign in fails, display a message to the user.
@@ -80,8 +88,19 @@ class LoginActivity : AppCompatActivity() {
         updateUI(currentUser)
     }
 
-    private fun updateUI(currentUser: FirebaseUser?): FirebaseUser? {
-        return currentUser
+    private fun updateUI(currentUser: FirebaseUser?) {
+        if (currentUser != null) {
+            if (currentUser.isEmailVerified) {
+                startActivity(Intent(this, Dashboard::class.java))
+                finish()
+            } else {
+                Toast.makeText(
+                    baseContext, "Please verify your email address",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+        }
     }
 
 
