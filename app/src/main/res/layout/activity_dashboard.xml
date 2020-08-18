@@ -11,9 +11,9 @@
         android:layout_width="348dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="@string/tv_logged_user_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:gravity="center"
         android:textSize="24sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/btn_change_password_submit"
         app:layout_constraintEnd_toEndOf="@+id/et_new_password"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="@+id/et_new_password"
         app:layout_constraintTop_toBottomOf="@+id/et_new_password" />
 
@@ -96,7 +96,6 @@
         android:id="@+id/btn_change_password_submit"
         android:layout_width="322dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:background="@color/colorAccent"
         android:text="@string/submit"
         android:textColor="#FFFFFF"
@@ -107,15 +106,17 @@
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="0dp"
+        android:layout_width="322dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="227dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="200dp"
         android:background="@color/colorPrimaryDark"
         android:text="Logout"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_change_password_submit" />
 
