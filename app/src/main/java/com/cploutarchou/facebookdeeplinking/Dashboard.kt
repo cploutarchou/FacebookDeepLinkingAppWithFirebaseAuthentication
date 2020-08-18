@@ -19,6 +19,9 @@ class Dashboard : AppCompatActivity() {
         btn_change_password_submit.setOnClickListener {
             changePassword()
         }
+        btn_logout.setOnClickListener {
+            logout()
+        }
     }
 
     private fun setUserData() {
@@ -87,5 +90,11 @@ class Dashboard : AppCompatActivity() {
             Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun logout() {
+        auth.signOut()
+        setContentView(R.layout.activity_main)
+    }
 }
+
 
