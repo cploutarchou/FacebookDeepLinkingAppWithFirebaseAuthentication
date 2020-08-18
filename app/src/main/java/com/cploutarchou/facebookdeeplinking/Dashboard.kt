@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.cploutarchou.facebookdeeplinking.R.layout.activity_main
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -18,6 +19,9 @@ class Dashboard : AppCompatActivity() {
         setUserData()
         btn_change_password_submit.setOnClickListener {
             changePassword()
+        }
+        btn_logout.setOnClickListener {
+            logout()
         }
     }
 
@@ -87,5 +91,11 @@ class Dashboard : AppCompatActivity() {
             Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun logout() {
+        auth.signOut()
+        setContentView(activity_main)
+    }
 }
+
 
