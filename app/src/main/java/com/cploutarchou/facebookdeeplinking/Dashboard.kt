@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.cploutarchou.facebookdeeplinking.R.layout.activity_main
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -93,7 +94,7 @@ class Dashboard : AppCompatActivity() {
 
     private fun logout() {
         auth.signOut()
-        setContentView(R.layout.activity_main)
+        setContentView(activity_main)
     }
 }
 

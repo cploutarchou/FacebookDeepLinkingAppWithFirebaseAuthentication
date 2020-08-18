@@ -2,21 +2,32 @@ package com.cploutarchou.facebookdeeplinking
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.util.Patterns
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private val tag = "MyMessage"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
+        val txtView: TextView = findViewById<TextView>(R.id.progress_counter)
+        progressBar.visibility = View.INVISIBLE
+        txtView.visibility = View.INVISIBLE
         auth = FirebaseAuth.getInstance()
 
         btn_sign_up.setOnClickListener {
@@ -54,6 +65,8 @@ class LoginActivity : AppCompatActivity() {
             login_password.requestFocus()
             return
         }
+        loadProgressBar(start = true)
+
         auth.signInWithEmailAndPassword(
             login_username.text.toString(),
             login_password.text.toString()
@@ -67,7 +80,6 @@ class LoginActivity : AppCompatActivity() {
                             Log.d(tag, "Email sent.")
                         }
                     }
-
                 // Sign in success, update UI with the signed-in user's information
                 Log.d(tag, "singInWithEmail:success")
                 updateUI(user)
@@ -103,6 +115,37 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadProgressBar(start: Boolean) {
+        val progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
+        val txtView: TextView = findViewById<TextView>(R.id.progress_counter)
+        var i = 0
+        val handler = Handler()
 
+        if (start) {
+            progressBar.visibility = View.VISIBLE
+            txtView.visibility = View.VISIBLE
+            i = progressBar.progress
+            Thread(Runnable {
+                while (i < 100) {
+                    i += 5
+                    // Update the progress bar and display the current value
+                    handler.post(Runnable {
+                        progressBar.progress = i
+                        txtView.text = i.toString() + "/" + progressBar.max
+                    })
+                    try {
+                        Thread.sleep(100)
+                    } catch (e: InterruptedException) {
+                        e.printStackTrace()
+                    }
+
+                }
+            }).start()
+        }
+    }
 }
+
+
+
+
 
