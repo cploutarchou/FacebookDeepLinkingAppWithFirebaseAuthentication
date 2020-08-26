@@ -42,7 +42,9 @@ class Dashboard : AppCompatActivity() {
     }
 
     private fun changePassword() {
-        if (et_original_password.text.isNotEmpty() && et_new_password.text.isNotEmpty() && et_new_password_confirm.text.isNotEmpty()) {
+        if (et_original_password.text.isNotEmpty() && et_new_password.text.isNotEmpty() &&
+            et_new_password_confirm.text.isNotEmpty()
+        ) {
             if (et_new_password.text.toString() == et_new_password_confirm.text.toString()) {
                 val user = auth.currentUser
                 if (user != null && user.email != null) {
@@ -83,17 +85,24 @@ class Dashboard : AppCompatActivity() {
 
                 }
             } else {
-                Toast.makeText(this, "Password combinations not matching", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this, "Password combinations not matching",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
 
         } else {
-            Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this, "Please fill all required fields",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
     private fun logout() {
         auth.signOut()
+        finish()
         setContentView(activity_main)
     }
 }

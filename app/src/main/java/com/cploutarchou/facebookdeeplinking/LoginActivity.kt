@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.cploutarchou.facebookdeeplinking
 
 import android.content.Intent
@@ -6,6 +8,7 @@ import android.os.Handler
 import android.util.Log
 import android.util.Patterns
 import android.view.View
+import android.view.View.INVISIBLE
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -24,10 +27,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
-        val txtView: TextView = findViewById<TextView>(R.id.progress_counter)
-        progressBar.visibility = View.INVISIBLE
-        txtView.visibility = View.INVISIBLE
+        val progressBar = this.findViewById(R.id.progress_Bar) as ProgressBar
+        val txtView: TextView = this.findViewById(R.id.progress_counter)
+        progressBar.visibility = INVISIBLE
+        txtView.visibility = INVISIBLE
         auth = FirebaseAuth.getInstance()
 
         btn_sign_up.setOnClickListener {
@@ -42,6 +45,9 @@ class LoginActivity : AppCompatActivity() {
 
         btn_login.setOnClickListener {
             doLogin()
+        }
+        btn_reset_password.setOnClickListener {
+            resetPassword()
         }
 
 
@@ -65,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
             login_password.requestFocus()
             return
         }
-        loadProgressBar(start = true)
+        loadProgressBar()
 
         auth.signInWithEmailAndPassword(
             login_username.text.toString(),
@@ -115,32 +121,55 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadProgressBar(start: Boolean) {
-        val progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
-        val txtView: TextView = findViewById<TextView>(R.id.progress_counter)
-        var i = 0
+    private fun loadProgressBar() {
+        val progressBar = this.findViewById(R.id.progress_Bar) as ProgressBar
+        val txtView: TextView = this.findViewById(R.id.progress_counter)
+        var i: Int
         val handler = Handler()
 
-        if (start) {
-            progressBar.visibility = View.VISIBLE
-            txtView.visibility = View.VISIBLE
-            i = progressBar.progress
-            Thread(Runnable {
-                while (i < 100) {
-                    i += 5
-                    // Update the progress bar and display the current value
-                    handler.post(Runnable {
-                        progressBar.progress = i
-                        txtView.text = i.toString() + "/" + progressBar.max
-                    })
-                    try {
-                        Thread.sleep(100)
-                    } catch (e: InterruptedException) {
-                        e.printStackTrace()
-                    }
 
+        progressBar.visibility = View.VISIBLE
+        txtView.visibility = View.VISIBLE
+        i = progressBar.progress
+        Thread {
+            while (i < 100) {
+                i += 5
+                // Update the progress bar and display the current value
+                handler.post {
+                    progressBar.progress = i
+                    txtView.text =
+                        ("""""" + i + """/""" + progressBar.max + """""").trimIndent()
                 }
-            }).start()
+                try {
+                    Thread.sleep(100)
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+
+            }
+        }.start()
+
+    }
+
+    private fun resetPassword() {
+        if (login_username.text.toString().isEmpty()) {
+            login_username.error = "Please enter your email address"
+            login_username.requestFocus()
+            return
+        }
+        auth.sendPasswordResetEmail(login_username.text.toString()).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d(tag, "Email send")
+                Toast.makeText(
+                    baseContext, "Email successfully send.Please check your inbox",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    baseContext, "Unable to reset password. Please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }
