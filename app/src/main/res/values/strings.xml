@@ -12,4 +12,7 @@
     <string name="current_password">Current Password</string>
     <string name="new_password">New password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="facebook_app_id">3791037540914510</string>
+    <string name="fb_login_protocol_scheme">fb3791037540914510</string>
+
 </resources>
