@@ -75,6 +75,7 @@ class Dashboard : AppCompatActivity() {
                 override fun onSuccess(loginResult: LoginResult?) {
                     Log.d("TAG", "Success Login")
                     getUserProfile(loginResult?.accessToken, loginResult?.accessToken?.userId)
+                    setContentView(R.layout.activity_dashboard)
                 }
 
                 override fun onCancel() {
@@ -250,7 +251,7 @@ class Dashboard : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager?.onActivityResult(requestCode, resultCode, data)
+        callbackManager!!.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
     }
 
