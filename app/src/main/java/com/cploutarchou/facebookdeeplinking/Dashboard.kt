@@ -8,6 +8,7 @@ import com.cploutarchou.facebookdeeplinking.R.layout.activity_main
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import com.facebook.FacebookSdk
 
 class Dashboard : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
