@@ -16,4 +16,6 @@
     <string name="fb_login_protocol_scheme">fb3088320627947253</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="todo">TODO</string>
+    <string name="logout">Logout</string>
+    <string name="login_success">Login success!</string>
 </resources>
