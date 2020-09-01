@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
+
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
